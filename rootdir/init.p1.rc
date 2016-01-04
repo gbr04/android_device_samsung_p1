@@ -8,6 +8,8 @@ on init
 
     loglevel 9
 
+    export LD_SHIM_LIBS /system/lib/libsec-ril.so|libsamsung_symbols.so
+
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1
 
