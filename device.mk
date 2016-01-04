@@ -73,7 +73,8 @@ PRODUCT_COPY_FILES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-	libsamsung_symbols
+    libsamsung_symbols \
+    ril-wrapper
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
