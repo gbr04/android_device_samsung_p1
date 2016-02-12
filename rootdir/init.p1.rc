@@ -10,22 +10,14 @@ on init
 
     export LD_SHIM_LIBS /system/lib/libril.so|libsamsung_symbols.so
 
-    export EXTERNAL_STORAGE /storage/sdcard0
-    export SECONDARY_STORAGE /storage/sdcard1
+setprop ro.vold.primary_physical 1
 
 #   FIXME: Market checks this variable for space-checking, but downloads to /datadata
     export DOWNLOAD_CACHE /data/download
 
-    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/sdcard0 0700 root root
-    mkdir /storage/sdcard1 0700 root root
-
-#   for backwards compatibility
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-    symlink /storage/sdcard1 /external_sd
-    symlink /storage/sdcard1 /mnt/external_sd
+    # for backwards compatibility
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard
 
     mkdir /datadata 0771 system system
 
@@ -38,8 +30,8 @@ on fs
 
 #   LVM: set up LVM volumes
     wait /sys/dev/block/179:0
-    exec_context u:r:lvm:s0 /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
-    exec_context u:r:lvm:s0 /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
+    exec /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
+    exec /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
     restorecon /dev/mapper/lvpool-system
     restorecon /dev/mapper/lvpool-userdata
 
@@ -93,8 +85,8 @@ on fs
 
 on post-fs
 
-    chown system system /datadata
-    chmod 0771 /datadata
+    chown system system /system
+    chmod 0771 /system
     restorecon_recursive /datadata
 
 #   symlink for samsung ril
@@ -104,8 +96,8 @@ on charger
 
 #   LVM: set up LVM volumes
     wait /sys/dev/block/179:0
-    exec_context u:r:lvm:s0 /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
-    exec_context u:r:lvm:s0 /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
+    exec /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
+    exec /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
     restorecon /dev/mapper/lvpool-system
     restorecon /dev/mapper/lvpool-userdata
 
@@ -203,17 +195,8 @@ service gpsd /system/vendor/bin/gpsd -c /system/vendor/etc/gps.xml
     user gps system
     group system inet
 
-# FUSE sdcard daemon for rich permissions (runs as media_rw)
-service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
-    class late_start
-    disabled
-
-# FUSE sdcard daemon for rich permissions (runs as media_rw)
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -t 4 /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
-service charger /sbin/healthd
+service charger /sbin/healthd -c
     class charger
+    group log
     critical
     seclabel u:r:healthd:s0
