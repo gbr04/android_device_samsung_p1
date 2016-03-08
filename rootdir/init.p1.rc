@@ -10,14 +10,13 @@ on init
 
     export LD_SHIM_LIBS /system/lib/libril.so|libsamsung_symbols.so
 
-    setprop ro.vold.primary_physical 1
-
 #   FIXME: Market checks this variable for space-checking, but downloads to /datadata
     export DOWNLOAD_CACHE /data/download
 
     # for backwards compatibility
-    symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard		     
+    symlink /storage/sdcard1 /external_sd
 
     mkdir /datadata 0771 system system
 
