@@ -9,6 +9,8 @@ on init
     loglevel 9
 
     export LD_SHIM_LIBS /system/lib/libril.so|libsamsung_symbols.so
+    
+    setprop ro.vold.primary_physical 1
 
 #   FIXME: Market checks this variable for space-checking, but downloads to /datadata
     export DOWNLOAD_CACHE /data/download
