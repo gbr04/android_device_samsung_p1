@@ -30,9 +30,8 @@ on boot
 on fs
 
 #   LVM: set up LVM volumes
-    wait /sys/dev/block/179:0
-    exec /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
-    exec /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
+    exec_context u:r:lvm:s0 /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
+    exec_context u:r:lvm:s0 /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
     restorecon /dev/mapper/lvpool-system
     restorecon /dev/mapper/lvpool-userdata
 
@@ -96,9 +95,8 @@ on post-fs
 on charger
 
 #   LVM: set up LVM volumes
-    wait /sys/dev/block/179:0
-    exec /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
-    exec /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
+    exec_context u:r:lvm:s0 /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
+    exec_context u:r:lvm:s0 /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
     restorecon /dev/mapper/lvpool-system
     restorecon /dev/mapper/lvpool-userdata
 
