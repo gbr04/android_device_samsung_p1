@@ -9,8 +9,6 @@ on init
     loglevel 9
 
     export LD_SHIM_LIBS /system/lib/libril.so|libsamsung_symbols.so
-    
-    setprop ro.vold.primary_physical 1
 
 #   FIXME: Market checks this variable for space-checking, but downloads to /datadata
     export DOWNLOAD_CACHE /data/download
@@ -120,8 +118,6 @@ on post-fs-data
 #   logs
     mkdir /data/log 0775 root root
     chmod 0775 /data/log
-
-    setprop vold.post_fs_data_done 1
 
 #   gps P1 only
     chown gps root /sys/class/sec/gps/GPS_PWR_EN/value
