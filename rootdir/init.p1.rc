@@ -12,6 +12,9 @@ on init
 
 #   FIXME: Market checks this variable for space-checking, but downloads to /datadata
     export DOWNLOAD_CACHE /data/download
+    
+    setprop vold.debug.default_primary 1
+    setprop ro.vold.primary_physical 1
 
     # for backwards compatibility
     symlink /storage/sdcard0 /sdcard
