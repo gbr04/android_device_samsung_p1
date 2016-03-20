@@ -18,7 +18,7 @@ on init
 
     # for backwards compatibility
     symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0		     
+    symlink /sdcard /storage/sdcard		     
 
     mkdir /datadata 0771 system system
 
@@ -88,7 +88,7 @@ on fs
 
 on post-fs
 
-    chown system system /datadata
+    chown system system /system
     chmod 0771 /datadata
     restorecon_recursive /datadata
 
