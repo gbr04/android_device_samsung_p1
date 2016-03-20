@@ -64,7 +64,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_ROOTDIR)/init.p1.usb.rc:recovery/root/usb.rc \
     $(DEVICE_ROOTDIR)/twrp.fstab:recovery/root/etc/twrp.fstab \
-    $(COMMON_ROOTDIR)/init.recovery.rc:root/init.recovery.p1.rc
+    $(COMMON_ROOTDIR)/init.recovery.rc:root/init.recovery.p1.rc \
+    $(COMMON_ROOTDIR)/lvm_init_recovery.sh:recovery/root/sbin/lvm_init_recovery.sh
 
 # RIL
 # Permissions
