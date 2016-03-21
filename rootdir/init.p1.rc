@@ -8,22 +8,14 @@ on init
 
     loglevel 9
 
-    export EXTERNAL_STORAGE /storage/sdcard0
-    export SECONDARY_STORAGE /storage/sdcard1
-
     export LD_SHIM_LIBS /system/lib/libril.so|libsamsung_symbols.so
 
 #   FIXME: Market checks this variable for space-checking, but downloads to /datadata
     export DOWNLOAD_CACHE /data/download
-    
-    setprop vold.debug.default_primary 1
-    setprop ro.vold.primary_physical 1
 
-#   for backwards compatibility
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-    symlink /storage/sdcard1 /external_sd
-    symlink /storage/sdcard1 /mnt/external_sd		     
+    # for backwards compatibility
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0		     
 
     mkdir /datadata 0771 system system
 
