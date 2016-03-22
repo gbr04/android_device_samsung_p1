@@ -25,14 +25,14 @@ TARGET_KERNEL_CONFIG := omni_p1_defconfig
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit Omni GSM telephony parts
-$(call inherit-product, vendor/omni/config/gsm.mk)
+# Specify phone tech before including full_phone
+$(call inherit-product, vendor/cm/config/gsm.mk)
 
 # bootanimation
 TARGET_BOOTANIMATION_SIZE := 640x362
 
 # Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common_tablet.mk)
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit device configuration.
 $(call inherit-product, device/samsung/p1/device.mk)
@@ -40,6 +40,6 @@ $(call inherit-product, device/samsung/p1/device.mk)
 # --------------------------------------------------------------------------------
 # Discard inherited values and use our own instead.
 # --------------------------------------------------------------------------------
-PRODUCT_NAME := omni_p1
+PRODUCT_NAME := cm_p1
 PRODUCT_DEVICE := p1
 PRODUCT_MODEL := GT-P1000
