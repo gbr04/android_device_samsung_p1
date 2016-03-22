@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-add_lunch_combo omni_p1-userdebug
+add_lunch_combo cm_p1-userdebug
