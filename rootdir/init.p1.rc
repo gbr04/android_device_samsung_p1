@@ -130,7 +130,7 @@ on post-fs-data
 
 #   sensors P1 only
 #   enable lightsensor-level
-    write /sys/class/input/input5/enable 1
+    write /sys/class/input/input2/enable 1
 
 #   system server can control backlight brightness
     chmod 0664 /sys/class/lcd/s5p_lcd/lcd_power
