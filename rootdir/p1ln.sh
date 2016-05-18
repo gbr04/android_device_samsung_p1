@@ -24,9 +24,9 @@ HW=$(busybox cat /proc/cpuinfo | \
     busybox tr -d ':' | \
     busybox tr -d '\t')
 
-DEVICE=$(busybox cat /default.prop | \
-    busybox grep ro.omni.device | \
-    busybox sed s#ro\.omni\.device=## | \
+DEVICE=$(busybox cat /system/build.prop | \
+    busybox grep ro.cm.device | \
+    busybox sed s#ro\.cm\.device=## | \
     busybox tr '[A-Z]' '[a-z]')
 
 case $HW in
