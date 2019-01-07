@@ -20,4 +20,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/cm_p1.mk
+    $(LOCAL_DIR)/lineage_p1.mk
