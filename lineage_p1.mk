@@ -25,9 +25,6 @@ TARGET_KERNEL_CONFIG := omni_p1_defconfig
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Specify phone tech before including full_phone
-$(call inherit-product, vendor/lineage/config/gsm.mk)
-
 # bootanimation
 TARGET_BOOTANIMATION_SIZE := 640x362
 
